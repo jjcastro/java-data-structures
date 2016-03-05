@@ -1,5 +1,7 @@
 package linearDS;
 
+import java.util.List;
+
 /**
  * Created by Juanjo on 3/5/16.
  */
@@ -20,7 +22,7 @@ public class ArrayList<E> {
      */
     public ArrayList() {
         size = 0;
-        data = (E[])(new Object[10]);
+        data = (E[]) (new Object[10]);
     }
 
     public int size() {
@@ -32,7 +34,7 @@ public class ArrayList<E> {
      * @param element
      */
     public void add(E element) {
-        if(data.length < size + 1) {
+        if (data.length < size + 1) {
             grow();
         }
         data[size] = element;
@@ -46,10 +48,10 @@ public class ArrayList<E> {
      */
     public void addAtIndex(E element, int index) throws ArrayIndexOutOfBoundsException {
         checkIndex(index);
-        if(data.length < size + 1) {
+        if (data.length < size + 1) {
             grow();
         }
-        for(int i = size; i > index; i--) {
+        for (int i = size; i > index; i--) {
             data[i] = data[i - 1];
         }
         data[index] = element;
@@ -63,11 +65,11 @@ public class ArrayList<E> {
      */
     public void removeAtIndex(int index) throws ArrayIndexOutOfBoundsException {
         checkIndex(index);
-        for(int i = index; i < size - 1; i++) {
+        for (int i = index; i < size - 1; i++) {
             data[i] = data[i + 1];
         }
         data[size] = null;
-        if(size > 0) size--;
+        if (size > 0) size--;
     }
 
     /**
@@ -75,7 +77,7 @@ public class ArrayList<E> {
      * @param element
      */
     public void remove(E element) {
-        for(int i = 0; i < size; i++) {
+        for (int i = 0; i < size; i++) {
             if (data[i].equals(element)) {
                 removeAtIndex(i);
                 break;
@@ -86,8 +88,8 @@ public class ArrayList<E> {
     @Override
     public String toString() {
         String res = "{";
-        for(int i = 0; i < size; i++) {
-            if(data[i] != null) {
+        for (int i = 0; i < size; i++) {
+            if (data[i] != null) {
                 res += data[i];
             } else {
                 res += "null";
@@ -98,13 +100,13 @@ public class ArrayList<E> {
     }
 
     private void checkIndex(int index) throws ArrayIndexOutOfBoundsException {
-        if(index < 0 || index >= size) {
+        if (index < 0 || index >= size) {
             throw new ArrayIndexOutOfBoundsException("Index exceeds size of list.");
         }
     }
 
     private void grow() {
-        E[] newData = (E[])(new Object[data.length * 2]);
+        E[] newData = (E[]) (new Object[data.length * 2]);
         System.arraycopy(data, 0, newData, 0, data.length);
         data = newData;
     }
